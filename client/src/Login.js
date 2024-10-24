@@ -17,7 +17,9 @@ function Login() {
       });
 
       if (response.data.token) {
+        // Store token in localStorage
         localStorage.setItem('token', `Bearer ${response.data.token}`);
+        // Redirect to home page
         navigate('/home');
       }
     } catch (error) {
