@@ -19,18 +19,33 @@ app.listen(PORT, () => {
 });
 
 const users = [
-    { username: 'admin', password: bcrypt.hashSync('123', 10) }
-  ];
-  
-  app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const user = users.find(u => u.username === username);
-  
-    if (user && bcrypt.compareSync(password, user.password)) {
-      const token = jwt.sign({ username }, 'secret_key', { expiresIn: '1h' });
-      res.json({ token });
-    } else {
-      res.status(401).json({ message: 'Invalid credentials' });
-    }
+  { username: 'admin', password: bcrypt.hashSync('123', 10) }
+];
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find(u => u.username === username);
+
+  if (user && bcrypt.compareSync(password, user.password)) {
+    const token = jwt.sign({ username }, 'secret_key', { expiresIn: '1h' });
+    res.json({ token });
+  } else {
+    res.status(401).json({ message: 'Invalid credentials' });
+  }
+});
+
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];  // Expecting format: "Bearer <token>"
+  if (!token) return res.status(401).json({ message: 'Token required' });
+
+  jwt.verify(token, 'secret_key', (err, user) => {
+    if (err) return res.status(403).json({ message: 'Invalid token' });
+    req.user = user;
+    next();
   });
-  
+};
+
+app.get('/home', authenticateToken, (req, res) => {
+  res.json({ message: `Welcome ${req.user.username}` });
+});
