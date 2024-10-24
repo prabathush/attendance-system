@@ -17,3 +17,20 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+const users = [
+    { username: 'admin', password: bcrypt.hashSync('123', 10) }
+  ];
+  
+  app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    const user = users.find(u => u.username === username);
+  
+    if (user && bcrypt.compareSync(password, user.password)) {
+      const token = jwt.sign({ username }, 'secret_key', { expiresIn: '1h' });
+      res.json({ token });
+    } else {
+      res.status(401).json({ message: 'Invalid credentials' });
+    }
+  });
+  
