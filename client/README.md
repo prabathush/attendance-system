@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Attendance System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple Attendance System project designed as part of a Software Engineer Internship selection process. The project demonstrates a basic authentication system with a login page and a home page, built using **React** for the frontend and **Node.js** for the backend. This project focuses on managing session authentication with **JWT** and enhances user experience with modern UI elements.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+1. [Project Structure](#project-structure)
+2. [Installation and Setup](#installation-and-setup)
+3. [Usage Instructions](#usage-instructions)
+4. [Client-Server Interaction](#client-server-interaction)
+5. [Project Screenshots](#project-screenshots)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 1. Project Structure
 
-### `npm test`
+attendance-system/ 
+                   ├── client/ # Frontend React application 
+                   ├── server/ # Backend Node.js server with REST API 
+                   └── docs/ # Screenshots and documentation for reference
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+- **client**: Contains the frontend React application files.
+- **server**: Contains the backend server code (Node.js) with REST API endpoints.
+- **docs**: Includes screenshots and documentation files.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 2. Installation and Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+Ensure you have **Node.js** and **npm** installed on your machine.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Setup Instructions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/prabathush/attendance-system.git
+   cd attendance-system
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Install dependencies:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+For the backend (server):
+cd server
+npm install
 
-## Learn More
+For the frontend (client):
+cd ../client
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Run the server:**
+Go to the server folder:
+cd ../server
+Start the server:
+node server.js
+The server will be running on http://localhost:5000.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. **Run the client:**
+Go to the client folder:
+cd ../client
+Start the client:
+npm start
+The client will be running on http://localhost:3000.
 
-### Code Splitting
+## 3. Usage Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Login Credentials for Testing
+    Username: admin
+    Password: 123
 
-### Analyzing the Bundle Size
+Basic Usage
+- Open the application in your browser by navigating to http://localhost:3000.
+- Use the provided credentials to log in.
+- Upon successful login, you will be redirected to the home page with a personalized welcome message.
+- To log out, click the Logout button. A confirmation modal will appear for security.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 4. Client-Server Interaction
+The project includes the following features to handle client-server interaction:
 
-### Making a Progressive Web App
+- Login Validation: Checks the username and password with the backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- JWT Authentication: If the credentials are valid, a JWT token is generated and stored in localStorage.
 
-### Advanced Configuration
+- Access Control:
+    If the user is not logged in, they cannot access the home page directly.
+    The application will redirect unauthorized users to the login page.
+    If already logged in, the user is redirected to the home page on attempting to access the login page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## 5. Project Screenshots
+Screenshots are located in the docs folder. Below is a quick reference for each screenshot:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Login Page (Default View)
 
-### `npm run build` fails to minify
+    Filename: Login_Page_Default_View.png
+    Description: Shows the login screen with fields for username and password, styled with icons.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Login Page (Invalid Credentials)
+
+    Filename: Login_Page_Invalid_Credentials.png
+    Description: Shows the error message when incorrect credentials are entered.
+
+Home Page (Welcome Message)
+
+    Filename: Home_Page_Welcome_Message.png
+    Description: Shows a personalized welcome message and a logout button.
+
+Logout Confirmation Modal
+
+    Filename: Logout_Confirmation.png
+    Description: Displays a modal asking the user to confirm before logging out.
